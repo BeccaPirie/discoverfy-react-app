@@ -1,0 +1,50 @@
+.gradient-background {
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(to bottom right, #d4145a, #fbb03b);
+    overflow: hidden;
+}
+
+#main-title {
+    color: white;
+    font-size: 60px;
+    width: fit-content;
+    margin: 30vh auto 20px;
+}
+
+#description {
+    color: white;
+    text-align: center;
+    margin: auto;
+    width: 300px;
+}
+
+.centre-btn {
+    width: fit-content;
+    margin: auto;
+    margin-top: 5vh;
+    
+}
+
+#login-btn {
+    width: 250px;
+    padding: 20px;
+    border-radius: 30px;
+    border: none;
+    background-color:rgb(255, 255, 255);
+    font-weight: 600;
+    font-size: 18px;
+    color: #4b4b4b;
+    cursor: pointer;
+}
+
+#main-title, #description, #login-btn {
+    animation-name: fade-in;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fade-in {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}
