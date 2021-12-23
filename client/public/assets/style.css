@@ -1,8 +1,305 @@
 * {
     font-family: 'Signika', sans-serif;
+    font-weight: 500;
 }
 
 body {
     margin: 0;
     padding: 0;
+}
+
+.gradient-background {
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(to bottom right, #d4145a, #fbb03b);
+    overflow: hidden;
+}
+
+.main-title {
+    color: white;
+    font-size: 60px;
+    width: fit-content;
+    margin: 30vh auto 20px;
+}
+
+.description {
+    color: white;
+    text-align: center;
+    margin: auto;
+    width: 300px;
+}
+
+.centre-btn {
+    width: fit-content;
+    margin: auto;
+    margin-top: 5vh;
+}
+
+.login-btn {
+    width: 250px;
+    padding: 20px;
+    border-radius: 30px;
+    border: none;
+    background-color:rgb(255, 255, 255);
+    font-weight: 600;
+    font-size: 18px;
+    color: #4b4b4b;
+}
+
+.main-title, .description, .login-btn {
+    animation-name: fade-in;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+nav {
+    color: black;
+    padding: 35px 20px;
+    font-size: 20px;
+    background-image: linear-gradient(to bottom right, #d4145a, #fbb03b);
+}
+
+.discoverfy {
+    font-weight: 600;
+    font-size: 25px;
+    width: fit-content;
+    float: left;
+    text-align: left;
+}
+
+nav ul {
+    text-align: center;
+    list-style: none;
+    margin: 0;
+    margin-top: 3px;
+    margin-left: -40px;
+}
+
+.top {
+    margin-top: 10px;
+}
+
+.menu-icon {
+    display: flex;
+    justify-content: flex-end;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.list-item:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+.songs {
+    width: 100%;
+    margin: 0 auto;
+    animation-name: fade-in;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.list-title {
+    width: 90%;
+    font-size: 25px;
+    color: #4b4b4b;
+    float: left;
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+.recommendations-title {
+    width: fit-content;
+    float: left;
+    margin-right: 20px;
+}
+
+.time-range-buttons {
+    margin: 15px;
+    height: fit-content;
+    width: fit-content;
+}
+
+.time-btn {
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #d41444;
+    background-color: white;
+    color: #d41444;
+    font-weight: 600;
+    margin-left: 3px;
+}
+
+.active {
+    border: 2.5px solid #d41444;
+    box-shadow: 2px 2px 6px 2px #e2e2e2;
+    font-weight: 700;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button:not(#login-btn):active {
+    box-shadow: 2px 2px 6px 2px #e2e2e2;
+}
+
+.list {
+    box-shadow: 10px 10px 60px 20px #f1f1f1;
+    clear: both;
+}
+
+.song-list-item {
+    padding: 20px;
+    clear: both;
+}
+
+.recommend-item:hover {
+    cursor: pointer;
+    background-color: rgb(240, 239, 239);
+}
+
+.song-details {
+    width: 200px;
+    float: left;
+}
+
+.album-img {
+    margin-right: 10px;
+    float: left;
+    width: 65px;
+    height: 65px;
+}
+
+.song-title {
+    margin: 0px;
+    margin-bottom: -15px;
+}
+
+.btn-right {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.recommendations-btn {
+    display: block;
+    width: 70px;
+    border: 2px solid #e46804;
+    border-radius: 5px;
+    padding: 5px;
+    background-color: white;
+    color: black;
+}
+
+.audio-btn {
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    padding: 9px 12px 9px 12px;
+    color: white;
+    background-image: linear-gradient(#e05e5e, #f3a245);
+    font-size: 16px;
+}
+
+.fa-play {
+    padding-left: 1px;
+}
+
+.preview-unavailable {
+    background-image: none;
+    background-color: rgb(177, 177, 177);
+}
+
+@keyframes fade-in {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}
+
+@media (min-width: 350px) {
+    .song-details {
+        width: 250px;
+    }
+
+}
+
+@media (min-width: 450px) {
+    .list-title {
+        width: 360px;
+    }
+}
+
+@media (min-width: 550px) {
+    .song-details {
+        width: 400px;
+    }
+}
+
+@media (min-width: 700px) {
+
+    nav ul {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .top {
+        margin-top: 0;
+    }
+
+    .list-item {
+        margin-left: 20px;
+        width: fit-content;
+    }
+
+    .menu-icon {
+        display: none;
+    }
+    
+    .hide {
+        display: flex;
+    }
+
+    .description {
+        width: fit-content;
+    }
+
+    .songs {
+        width: 650px;
+        margin: 30px auto;
+        box-shadow: 10px 10px 30px 20px #f1f1f1;
+    }
+
+    .time-range-buttons {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 25px;
+    }
+
+    .song-details {
+        width: 500px;
+    }
+
+    .recommendations-btn {
+        width: fit-content;
+    }
+}
+
+@media (min-width: 900px) {
+    .songs {
+        width: 850px;
+    }
+
+    .song-details {
+        width: 600px;
+    }
+
+    .list-title {
+        width: 560px;
+    }
 }
