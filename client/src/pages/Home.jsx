@@ -1,5 +1,6 @@
 import RecentTracks from "../components/RecentTracks"
 import TopTracks from "../components/TopTracks"
+import Recommendations from "../components/Recommendations"
 import useAuth from "../useAuth"
 import { useState } from 'react'
 
@@ -7,6 +8,7 @@ export default function Home({code}) {
     useAuth(code)
     const [showMenuItems, setShowMenuItems] = useState(false)
     const [selectedItem, setSelectedItem] = useState("recenttracks")
+    const [selectedTrack, setSelectedTrack] = useState()
 
     return (
         <>
@@ -27,8 +29,9 @@ export default function Home({code}) {
                     </li>
                 </ul>
             </nav>
-            {selectedItem === "recenttracks" && <RecentTracks />}
-            {selectedItem === "toptracks" && <TopTracks />}
+            {selectedItem === "recenttracks" && <RecentTracks setSelectedItem={setSelectedItem} setSelectedTrack={setSelectedTrack}/>}
+            {selectedItem === "toptracks" && <TopTracks setSelectedItem={setSelectedItem} setSelectedTrack={setSelectedTrack}/>}
+            {selectedItem === "recommendations" && <Recommendations track={selectedTrack} />}
         </>
     )
 }

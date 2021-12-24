@@ -5,7 +5,7 @@ const spotifyApi = new SpotifyWebApi({
     clientId: process.env.REACT_APP_CLIENT_ID,
   })
 
-export default function SongListItem({track, accessToken}) {
+export default function SongListItem({track, accessToken, setSelectedItem, setSelectedTrack}) {
     const[image, setImage] = useState("")
 
     useEffect(() => {
@@ -19,6 +19,11 @@ export default function SongListItem({track, accessToken}) {
           })
       })
 
+      const handleClick = () => {
+        setSelectedItem("recommendations")
+        setSelectedTrack(track.id)
+      }
+
     return (
         <div className="song-list-item">
             <div className="song-details">
@@ -27,7 +32,7 @@ export default function SongListItem({track, accessToken}) {
                 <p className="artists-name">{track.artists}</p>
             </div>    
             <div className="btn-right">
-                <button className="recommendations-btn">Find new music</button>
+                <button className="recommendations-btn" onClick={handleClick}>Find new music</button>
             </div>
         </div>
     )

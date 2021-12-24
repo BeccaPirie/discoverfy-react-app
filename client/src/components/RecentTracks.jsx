@@ -8,7 +8,7 @@ const spotifyApi = new SpotifyWebApi({
     clientId: process.env.REACT_APP_CLIENT_ID,
   })
   
-export default function RecentTracks() {
+export default function RecentTracks({setSelectedItem, setSelectedTrack}) {
     const { token: accessToken } = useContext(AuthContext)
     const[recentTracks, setRecentTracks] = useState([])
 
@@ -35,6 +35,7 @@ export default function RecentTracks() {
                     }
                 })
             )
+            console.log(recentTracks)
         })
     },[accessToken])    
 
@@ -45,7 +46,7 @@ export default function RecentTracks() {
             </div>
             <div className="list">
                 {recentTracks.map((track, index) => {
-                    return <SongListItem key={index} track={track} accessToken={accessToken}/>
+                    return <SongListItem key={index} track={track} accessToken={accessToken} setSelectedItem={setSelectedItem} setSelectedTrack={setSelectedTrack}/>
                 })}
             </div>
         </div>        

@@ -18,8 +18,6 @@ export default function useAuth(code) {
             setRefreshToken(res.data.refreshToken)
             setExpiresIn(res.data.expiresIn)
             dispatch({ type:"TOKEN", payload: res.data.accessToken });
-            console.log(res.data.accessToken)
-            console.log(token)
             window.history.pushState({}, null, "/")
         }
         catch(err) {
@@ -46,6 +44,5 @@ export default function useAuth(code) {
         return () => clearInterval(interval)
     }, [refreshToken, expiresIn])
     
-
     return accessToken
 }
