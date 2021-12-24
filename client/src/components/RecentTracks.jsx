@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import SpotifyWebApi from "spotify-web-api-node"
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext'
+import axios from 'axios';
 
 const spotifyApi = new SpotifyWebApi({
     clientId: process.env.REACT_APP_CLIENT_ID,
@@ -11,6 +12,15 @@ const spotifyApi = new SpotifyWebApi({
 export default function RecentTracks({setSelectedItem, setSelectedTrack}) {
     const { token: accessToken } = useContext(AuthContext)
     const[recentTracks, setRecentTracks] = useState([])
+
+    // useEffect(() => {
+    //     const fetchRecentTracks = async () => {
+    //         const res = await axios.get('http://localhost:8000/recent-tracks')
+    //         console.log(res.data)
+    //         setRecentTracks(res.data)
+    //     }
+    //     fetchRecentTracks()
+    // }, [accessToken])
 
     useEffect(() => {
         if (!accessToken) return

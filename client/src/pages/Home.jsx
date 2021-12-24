@@ -3,6 +3,7 @@ import TopTracks from "../components/TopTracks"
 import Recommendations from "../components/Recommendations"
 import useAuth from "../useAuth"
 import { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 export default function Home({code}) {
     useAuth(code)
@@ -13,7 +14,9 @@ export default function Home({code}) {
     return (
         <>
             <nav>
-                <div className="discoverfy"><a href="/">Discoverfy</a></div>
+                <Link to={"/"}>
+                    <div className="discoverfy">Discoverfy</div>
+                </Link>
                 <ul>
                     <li className="menu-icon"
                         onClick={() => setShowMenuItems(!showMenuItems)}>
