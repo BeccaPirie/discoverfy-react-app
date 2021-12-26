@@ -181,7 +181,7 @@ button:hover {
     cursor: pointer;
 }
 
-button:not(#login-btn):active {
+button:not(.login-btn):active {
     box-shadow: 2px 2px 6px 2px #e2e2e2;
 }
 
@@ -210,6 +210,10 @@ button:not(#login-btn):active {
     float: left;
     width: 65px;
     height: 65px;
+}
+
+.rec-img {
+    margin-top: -12px;
 }
 
 .song-title {

@@ -35,7 +35,7 @@ export default function RecommendationListItem({track, accessToken}) {
         <a href={track.uri}>
            <div className="song-list-item recommend-item">
                 <div className="song-details">
-                    <img className="album-img" src={image} alt="album art" />
+                    <img className="album-img rec-img" src={image} alt="album art" />
                     <p className="song-title">{track.name}</p>
                     <p className="artists-name">{track.artists}</p>
                 </div>   
