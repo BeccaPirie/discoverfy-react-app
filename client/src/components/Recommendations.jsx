@@ -48,14 +48,31 @@ export default function Recommendations({track}) {
           })
       },[track, accessToken])
 
+      const handleCreatePlaylist = async() => {
+        let uris = []
+        recommendations.forEach(recentTrack => {
+            uris.push(recentTrack.uri)
+        })
+
+        spotifyApi.createPlaylist(`Discoverfy- ${playedTrack}`)
+            .then(res => {
+                spotifyApi.addTracksToPlaylist(res.body.id, uris)
+            })       
+    }
+
     return (
-        <div className="songs">
-            <h3 className="list-title" id="recommendations-title">Recommendations for {playedTrack}</h3>
-            <div className="list">
-            {recommendations.map((track, index) => {
-                    return <RecommendationListItem key={index} track={track} accessToken={accessToken}/>
-                })}
-            </div>
-        </div>
+      <div className="songs">
+          <h3 className="list-title" id="recommendations-title">Recommendations for {playedTrack}</h3>
+          <div className="create-playlist-div">
+                  <button className="create-playlist-btn" onClick={handleCreatePlaylist}>
+                      Create Playlist
+                  </button>
+              </div>
+          <div className="list">
+          {recommendations.map((track, index) => {
+                  return <RecommendationListItem key={index} track={track} accessToken={accessToken}/>
+              })}
+          </div>
+      </div>
     )
 }

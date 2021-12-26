@@ -13,7 +13,6 @@ export default function useAuth(code) {
             const res = await axios.post("/login", {
                 code,
             })
-            console.log(res.data)
             setAccessToken(res.data.accessToken)
             setRefreshToken(res.data.refreshToken)
             setExpiresIn(res.data.expiresIn)

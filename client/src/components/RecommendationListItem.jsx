@@ -7,6 +7,7 @@ const spotifyApi = new SpotifyWebApi({
 
 export default function RecommendationListItem({track, accessToken}) {
     const[image, setImage] = useState("")
+    const[playing, setPlaying] = useState(false)
 
     useEffect(() => {
         if (!accessToken) return
@@ -19,19 +20,33 @@ export default function RecommendationListItem({track, accessToken}) {
           })
       })
 
+    const playPreview = () => {
+        const audio = new Audio(track.preview)
+        if(!playing) {
+            audio.play()
+            setPlaying(true)
+        } else {
+            audio.pause()
+            setPlaying(false)
+        }  
+    }
+
     return (
-        <div className="song-list-item recommend-item">
-            <div className="song-details">
-                <img className="album-img" src={image} alt="album art" />
-                <p className="song-title">{track.name}</p>
-                <p className="artists-name">{track.artists}</p>
-            </div>   
+        <a href={track.uri}>
+           <div className="song-list-item recommend-item">
+                <div className="song-details">
+                    <img className="album-img" src={image} alt="album art" />
+                    <p className="song-title">{track.name}</p>
+                    <p className="artists-name">{track.artists}</p>
+                </div>   
                 <div className="btn-right">
-                    <button className="audio-btn"><i className="fa fa-play"></i></button>
+                    <button className="audio-btn" onClick={playPreview}><i className="fa fa-play"></i></button>
                     <audio className="recommend-audio">
-                        <source src="" type="audio/mpeg" />
+                        <source src={track.preview_url} type="audio/mpeg" />
                     </audio>
                 </div>
-            </div>
+            </div> 
+        </a>
+        
     )
 }

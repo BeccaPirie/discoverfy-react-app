@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import SpotifyWebApi from "spotify-web-api-node"
 import { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext'
-import axios from 'axios';
 
 const spotifyApi = new SpotifyWebApi({
     clientId: process.env.REACT_APP_CLIENT_ID,
@@ -13,19 +12,10 @@ export default function RecentTracks({setSelectedItem, setSelectedTrack}) {
     const { token: accessToken } = useContext(AuthContext)
     const[recentTracks, setRecentTracks] = useState([])
 
-    // useEffect(() => {
-    //     const fetchRecentTracks = async () => {
-    //         const res = await axios.get('http://localhost:8000/recent-tracks')
-    //         console.log(res.data)
-    //         setRecentTracks(res.data)
-    //     }
-    //     fetchRecentTracks()
-    // }, [accessToken])
-
     useEffect(() => {
-        if (!accessToken) return
-        spotifyApi.setAccessToken(accessToken)
-      }, [accessToken])
+            if (!accessToken) return
+            spotifyApi.setAccessToken(accessToken)
+        }, [accessToken])
 
     useEffect(() => {
         spotifyApi.getMyRecentlyPlayedTracks({
@@ -38,21 +28,39 @@ export default function RecentTracks({setSelectedItem, setSelectedTrack}) {
                         artists += `${artist.name}, `
                       })
                       artists = artists.substring(0, artists.length-2)
-                    return {
+
+                      return {
                         id: item.track.id,
                         name: item.track.name,
-                        artists: artists
+                        artists: artists,
+                        uri: item.track.uri
                     }
                 })
             )
-            console.log(recentTracks)
         })
     },[accessToken])    
+
+    const handleCreatePlaylist = async() => {
+        let uris = []
+        recentTracks.forEach(recentTrack => {
+            uris.push(recentTrack.uri)
+        })
+
+        spotifyApi.createPlaylist('Discoverfy- Recent Tracks')
+            .then(res => {
+                spotifyApi.addTracksToPlaylist(res.body.id, uris)
+            })       
+    }
 
     return (
         <div className="songs">
             <div className="songs-head">
-                <h3 className="list-title">Your Recently Played Tracks</h3>   
+                <h3 className="list-title">Your Recently Played Tracks</h3>
+                <div className="create-playlist-div">
+                    <button className="createPlayistBtn" onClick={handleCreatePlaylist}>
+                        Create Playlist
+                    </button>
+                </div>
             </div>
             <div className="list">
                 {recentTracks.map((track, index) => {

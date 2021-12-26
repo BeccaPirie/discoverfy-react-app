@@ -53,6 +53,7 @@ body {
 }
 
 nav {
+    height: 25px;
     color: black;
     padding: 35px 20px;
     font-size: 20px;
@@ -67,7 +68,12 @@ nav {
     text-align: left;
 }
 
-nav ul {
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/* nav ul {
     text-align: center;
     list-style: none;
     margin: 0;
@@ -96,6 +102,17 @@ a {
 
 .hide {
     display: none;
+} */
+
+.form {
+    width: 60%;
+    margin: 25px auto;
+}
+
+.search-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #f18c49;
 }
 
 .songs {
@@ -121,7 +138,7 @@ a {
     margin-right: 20px;
 }
 
-.time-range-buttons {
+/* .time-range-buttons {
     margin: 15px;
     height: fit-content;
     width: fit-content;
@@ -141,6 +158,23 @@ a {
     border: 2.5px solid #d41444;
     box-shadow: 2px 2px 6px 2px #e2e2e2;
     font-weight: 700;
+} */
+
+.create-playlist-div {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+    padding-right: 15px;
+}
+
+.create-playlist-btn {
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid #d41444;
+    background-color: white;
+    color: #d41444;
+    font-weight: 600;
+    margin-left: 3px;
 }
 
 button:hover {
@@ -161,7 +195,7 @@ button:not(#login-btn):active {
     clear: both;
 }
 
-.recommend-item:hover {
+.search-item:hover, .recommend-item:hover {
     cursor: pointer;
     background-color: rgb(240, 239, 239);
 }
@@ -243,16 +277,16 @@ button:not(#login-btn):active {
 
 @media (min-width: 700px) {
 
-    nav ul {
+    /* nav ul {
         display: flex;
         justify-content: flex-end;
     }
 
     .top {
         margin-top: 0;
-    }
+    } */
 
-    .list-item {
+    /* .list-item {
         margin-left: 20px;
         width: fit-content;
     }
@@ -263,7 +297,7 @@ button:not(#login-btn):active {
     
     .hide {
         display: flex;
-    }
+    } */
 
     .description {
         width: fit-content;
@@ -275,11 +309,11 @@ button:not(#login-btn):active {
         box-shadow: 10px 10px 30px 20px #f1f1f1;
     }
 
-    .time-range-buttons {
+    /* .time-range-buttons {
         display: flex;
         justify-content: flex-end;
         padding-top: 25px;
-    }
+    } */
 
     .song-details {
         width: 500px;
