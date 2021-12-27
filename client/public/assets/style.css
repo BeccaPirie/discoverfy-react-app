@@ -177,12 +177,24 @@ a {
     margin-left: 3px;
 }
 
+.create-playlist-btn:hover {
+    border: 2.5px solid #d41444;
+    box-shadow: 2px 2px 6px 2px #e2e2e2;
+    font-weight: 700;
+}
+
 button:hover {
     cursor: pointer;
 }
 
 button:not(.login-btn):active {
     box-shadow: 2px 2px 6px 2px #e2e2e2;
+}
+
+.playlist-saved {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 22px;
 }
 
 .list {

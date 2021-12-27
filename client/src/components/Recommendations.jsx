@@ -12,62 +12,70 @@ export default function Recommendations({track}) {
     const { token: accessToken } = useContext(AuthContext)
     const[recommendations, setRecommendations] = useState([])
     const[playedTrack, setPlayedTrack] = useState("")
+    const[playlistSaved, setPlaylistSaved] = useState(false)
 
     useEffect(() => {
-        if (!accessToken) return
-        spotifyApi.setAccessToken(accessToken)
-      }, [accessToken])
+      if (!accessToken) return
+      spotifyApi.setAccessToken(accessToken)
+    }, [accessToken])
 
-      useEffect(() => {
-        spotifyApi.getTrack(track).then(res => {
-          setPlayedTrack(res.body.name)
-        })
+    useEffect(() => {
+      spotifyApi.getTrack(track).then(res => {
+        setPlayedTrack(res.body.name)
+      })
     },[track])
 
-      useEffect(() => {
-          spotifyApi.getRecommendations({
-              limit: 50,
-              seed_tracks: track
-          }).then(res => {
-              setRecommendations(
-                  res.body.tracks.map(track => {
-                    let artists = ""
-                    track.artists.forEach(artist => {
-                      artists += `${artist.name}, `
-                    })
-                    artists = artists.substring(0, artists.length-2)
-                    return {
-                        id: track.id,
-                        name: track.name,
-                        artists: artists,
-                        preview: track.preview_url,
-                        uri: track.uri
-                    }
-                  })
-              )
+    useEffect(() => {
+      spotifyApi.getRecommendations({
+          limit: 50,
+          seed_tracks: track
+      }).then(res => {
+          setRecommendations(
+              res.body.tracks.map(track => {
+                let artists = ""
+                track.artists.forEach(artist => {
+                  artists += `${artist.name}, `
+                })
+                artists = artists.substring(0, artists.length-2)
+                return {
+                    id: track.id,
+                    name: track.name,
+                    artists: artists,
+                    preview: track.preview_url,
+                    uri: track.uri
+                }
+              })
+          )
+      })
+    },[track, accessToken])
+
+    const handleCreatePlaylist = async() => {
+      let uris = []
+      recommendations.forEach(recentTrack => {
+          uris.push(recentTrack.uri)
+      })
+
+      spotifyApi.createPlaylist(`Discoverfy- ${playedTrack}`)
+          .then(res => {
+              spotifyApi.addTracksToPlaylist(res.body.id, uris)
           })
-      },[track, accessToken])
-
-      const handleCreatePlaylist = async() => {
-        let uris = []
-        recommendations.forEach(recentTrack => {
-            uris.push(recentTrack.uri)
-        })
-
-        spotifyApi.createPlaylist(`Discoverfy- ${playedTrack}`)
-            .then(res => {
-                spotifyApi.addTracksToPlaylist(res.body.id, uris)
-            })       
+          .then(() => {
+            setPlaylistSaved(true)
+            const hideMessage = setTimeout(() => {
+              setPlaylistSaved(false)
+            }, 2000)
+          })
     }
 
     return (
       <div className="songs">
           <h3 className="list-title" id="recommendations-title">Recommendations for {playedTrack}</h3>
           <div className="create-playlist-div">
-                  <button className="create-playlist-btn" onClick={handleCreatePlaylist}>
-                      Create Playlist
-                  </button>
-              </div>
+            <button className="create-playlist-btn" onClick={handleCreatePlaylist}>
+                Create Playlist
+            </button>
+          </div>
+          {playlistSaved && <div className="playlist-saved">Playlist saved!</div>}
           <div className="list">
           {recommendations.map((track, index) => {
                   return <RecommendationListItem key={index} track={track} accessToken={accessToken}/>
