@@ -13,6 +13,8 @@ export default function Recommendations({track}) {
     const[recommendations, setRecommendations] = useState([])
     const[playedTrack, setPlayedTrack] = useState("")
     const[playlistSaved, setPlaylistSaved] = useState(false)
+    const[audioPlaying, setAudioPlaying] = useState("")
+    // let allAudio = []
 
     useEffect(() => {
       if (!accessToken) return
@@ -32,6 +34,8 @@ export default function Recommendations({track}) {
       }).then(res => {
           setRecommendations(
               res.body.tracks.map(track => {
+                // allAudio.push(new Audio(track.preview_url))
+                // console.log(allAudio)
                 let artists = ""
                 track.artists.forEach(artist => {
                   artists += `${artist.name}, `
@@ -67,6 +71,20 @@ export default function Recommendations({track}) {
           })
     }
 
+    // const playAudio = (audio) => {
+    //   if(audioPlaying) {
+    //     allAudio[audioPlaying].pause()
+    //   }
+    //   allAudio[audio].play()
+    //   setAudioPlaying(audio)
+    // }
+
+    // const pauseAudio = (audio) => {
+    //   console.log(audio)
+    //   setAudioPlaying(null)
+    //   allAudio[audio].pause()
+    // }
+
     return (
       <div className="songs">
           <h3 className="list-title" id="recommendations-title">Recommendations for {playedTrack}</h3>
@@ -78,7 +96,13 @@ export default function Recommendations({track}) {
           {playlistSaved && <div className="playlist-saved">Playlist saved!</div>}
           <div className="list">
           {recommendations.map((track, index) => {
-                  return <RecommendationListItem key={index} track={track} accessToken={accessToken}/>
+                  return <RecommendationListItem
+                    key={index}
+                    track={track}
+                    // playAudio={playAudio}
+                    // pauseAudio={pauseAudio}
+                    // allAudio={allAudio}
+                    />
               })}
           </div>
       </div>

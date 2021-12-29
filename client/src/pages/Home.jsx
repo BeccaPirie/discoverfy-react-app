@@ -11,8 +11,6 @@ const spotifyApi = new SpotifyWebApi({
 
 export default function Home({code}) {
     const accessToken = useAuth(code)
-    // const [showMenuItems, setShowMenuItems] = useState(false)
-    // const [selectedItem, setSelectedItem] = useState("recenttracks")
     const [selectedTrack, setSelectedTrack] = useState()
     const [search, setSearch] = useState("")
     const [searchResults, setSearchResults] = useState([])
@@ -56,20 +54,6 @@ export default function Home({code}) {
                 <Link to={"/"}>
                     <div className="discoverfy">Discoverfy</div>
                 </Link>
-                {/* <ul>
-                    <li className="menu-icon"
-                        onClick={() => setShowMenuItems(!showMenuItems)}>
-                            <a href="#"><i className="fa fa-bars"></i></a>
-                    </li>
-                    <li className={`list-item top ${!showMenuItems && 'hide'}`}
-                        onClick={() => setSelectedItem("recenttracks")}>
-                            Recently Played Tracks
-                    </li>
-                    <li className={`list-item ${!showMenuItems && 'hide'}`}
-                        onClick={() => setSelectedItem("toptracks")}>
-                            Top Tracks
-                    </li>
-                </ul> */}
             </nav>
 
             <div className="form">
